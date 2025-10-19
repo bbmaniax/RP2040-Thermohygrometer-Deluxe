@@ -17,10 +17,10 @@
 #include "TimeKeeper.h"
 #include "View.h"
 
-#define BUTTON_PIN 2
-#define I2C1_SDA_PIN 29
-#define I2C1_SCL_PIN 28
-#define I2C2_SDA_PIN 4
+#define BUTTON_PIN 29
+#define I2C1_SDA_PIN 28
+#define I2C1_SCL_PIN 14
+#define I2C2_SDA_PIN 5
 #define I2C2_SCL_PIN 6
 #define I2C3_SDA_PIN 7
 #define I2C3_SCL_PIN 8
