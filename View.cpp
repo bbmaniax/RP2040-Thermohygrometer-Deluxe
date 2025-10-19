@@ -21,7 +21,7 @@ View::View(Model& model, SSD1306Display& display1, SSD1306Display& display2, SSD
 
 void View::begin(uint8_t i2cAddress, bool displayOn) {
   DEBUG_SERIAL_PRINTLN("Initializing display: displayOn=" + String(displayOn));
-  viewMode = VIEW_MODE_ALL_TEXT;
+  viewMode = VIEW_MODE_ALL_CHARTS;
   flipped = initialFlipped;
   if (!display1.begin()) { DEBUG_SERIAL_PRINTLN("Failed to initialize display1"); }
   if (!display2.begin()) { DEBUG_SERIAL_PRINTLN("Failed to initialize display2"); }
@@ -52,46 +52,10 @@ SSD1306Display** View::getDisplays() {
 void View::render() {
   // DEBUG_SERIAL_PRINTLN("Rendering view: mode=" + String(static_cast<int>(viewMode)) + ", flipped=" + String(flipped));
   switch (viewMode) {
-    case VIEW_MODE_ALL_TEXT: renderAllText(); break;
     case VIEW_MODE_ALL_CHARTS: renderAllCharts(); break;
+    case VIEW_MODE_ALL_TEXT: renderAllText(); break;
     default: renderAllText(); break;
   }
-}
-
-void View::renderAllText() {
-  // DEBUG_SERIAL_PRINTLN("Rendering current sensor data");
-  SSD1306Display** displays = getDisplays();
-
-  displays[0]->clearDisplay();
-  displays[0]->setRotation(flipped ? 2 : 0);
-  displays[0]->setTextSize(1);
-  displays[0]->setTextColor(SSD1306_WHITE);
-  printRight(*displays[0], String(model.getLatestTemperature() / 10.0f, 1) + "C", 16);
-
-  displays[1]->clearDisplay();
-  displays[1]->setRotation(flipped ? 2 : 0);
-  displays[1]->setTextSize(1);
-  displays[1]->setTextColor(SSD1306_WHITE);
-  printRight(*displays[1], String(model.getLatestHumidity() / 10.0f, 1) + "%", 16);
-
-  displays[2]->clearDisplay();
-  displays[2]->setRotation(flipped ? 2 : 0);
-  displays[2]->setTextSize(1);
-  displays[2]->setTextColor(SSD1306_WHITE);
-  printRight(*displays[2], String(model.getLatestPressure() / 10.0f, 1) + "hPa", 16);
-
-  displays[0]->display();
-  displays[1]->display();
-  displays[2]->display();
-}
-
-void View::printRight(SSD1306Display& display, const String& text, int16_t y) {
-  int16_t x1, y1, x2, y2;
-  int16_t w, h;
-  // display.getTextBounds(text, 0, y, &x1, &y1, &x2, &y2, &w, &h);
-  w = text.length() * 12 * display.getWidth() / 128;
-  display.setCursor(display.getWidth() - w, y);
-  display.print(text);
 }
 
 void View::renderAllCharts() {
@@ -159,4 +123,40 @@ void View::drawChart(SSD1306Display& display, History& history) {
 
     display.drawLine(width - (i * step) - 1, currentY, width - ((i + 1) * step) - 1, nextY, SSD1306_WHITE);
   }
+}
+
+void View::renderAllText() {
+  // DEBUG_SERIAL_PRINTLN("Rendering current sensor data");
+  SSD1306Display** displays = getDisplays();
+
+  displays[0]->clearDisplay();
+  displays[0]->setRotation(flipped ? 2 : 0);
+  displays[0]->setTextSize(1);
+  displays[0]->setTextColor(SSD1306_WHITE);
+  printRight(*displays[0], String(model.getLatestTemperature() / 10.0f, 1) + "C", 16);
+
+  displays[1]->clearDisplay();
+  displays[1]->setRotation(flipped ? 2 : 0);
+  displays[1]->setTextSize(1);
+  displays[1]->setTextColor(SSD1306_WHITE);
+  printRight(*displays[1], String(model.getLatestHumidity() / 10.0f, 1) + "%", 16);
+
+  displays[2]->clearDisplay();
+  displays[2]->setRotation(flipped ? 2 : 0);
+  displays[2]->setTextSize(1);
+  displays[2]->setTextColor(SSD1306_WHITE);
+  printRight(*displays[2], String(model.getLatestPressure() / 10.0f, 1) + "hPa", 16);
+
+  displays[0]->display();
+  displays[1]->display();
+  displays[2]->display();
+}
+
+void View::printRight(SSD1306Display& display, const String& text, int16_t y) {
+  int16_t x1, y1, x2, y2;
+  int16_t w, h;
+  // display.getTextBounds(text, 0, y, &x1, &y1, &x2, &y2, &w, &h);
+  w = text.length() * 12 * display.getWidth() / 128;
+  display.setCursor(display.getWidth() - w, y);
+  display.print(text);
 }

@@ -20,8 +20,8 @@ public:
 
 private:
   typedef enum {
-    VIEW_MODE_ALL_TEXT = 0,
-    VIEW_MODE_ALL_CHARTS,
+    VIEW_MODE_ALL_CHARTS = 0,
+    VIEW_MODE_ALL_TEXT,
     VIEW_MODE_COUNT,
   } ViewMode;
 
