@@ -1,6 +1,6 @@
 SKETCH ?= RP2040-Thermohygrometer-Deluxe.ino
 CORES ?= arduino:avr rp2040:rp2040
-LIBS ?= "Adafruit AHTX0" "Adafruit BMP280 Library" "Adafruit SSD1306" "Adafruit NeoPixel"
+LIBS ?= "Adafruit AHTX0" "Adafruit BMP280 Library" "Adafruit SSD1306" "Adafruit NeoPixel" "SoftI2C"
 
 BUILD_CONFIG ?= ./arduino-cli.yaml
 BUILD_DIR ?= ./build
