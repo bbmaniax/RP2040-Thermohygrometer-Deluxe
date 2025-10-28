@@ -8,8 +8,8 @@ RP2040-Zero を使用したコンパクトな温湿度・気圧計のデラッ�
 ３つの OLED を使用して、温度・湿度・気圧のグラフを同時に表示します。
 
 <div>
-<img src="./images/pattern2.jpg" alt="テキスト" width="120" />
 <img src="./images/pattern3.jpg" alt="上下反転" width="120"  />
+<img src="./images/pattern2.jpg" alt="テキスト" width="120" />
 </div>
 
 ## 部材
@@ -23,62 +23,27 @@ RP2040-Zero を使用したコンパクトな温湿度・気圧計のデラッ�
 | OLED モジュール | 0.91" 128x32 SSD1306 | 3個 |
 | 温湿度・気圧センサーモジュール | AHT20+BMP280 | 1個 |
 
-## 接続
-
-### タクトスイッチ
-
-| タクトスイッチ | RP2040-Zero |
-|:--------|:------------------|
-| タクトスイッチ PIN 1 | GPIO 29 |
-| タクトスイッチ PIN 2 | GND |
-
-### OLED ディスプレイ #1
-
-| OLED モジュール | RP2040-Zero  |
-| --------------- | ------------ |
-| VCC             | 3.3V         |
-| GND             | GND          |
-| SDA             | GPIO 29      |
-| SCL             | GPIO 28      |
-
-### OLED ディスプレイ #2
-
-| OLED モジュール | RP2040-Zero  |
-| --------------- | ------------ |
-| VCC             | 3.3V         |
-| GND             | GND          |
-| SDA             | GPIO 4       |
-| SCL             | GPIO 6       |
-
-### OLED ディスプレイ #3
-
-| OLED モジュール | RP2040-Zero  |
-| --------------- | ------------ |
-| VCC             | 3.3V         |
-| GND             | GND          |
-| SDA             | GPIO 7       |
-| SCL             | GPIO 8       |
-
-### 温湿度・気圧センサーモジュール
-
-| 温湿度・気圧センサーモジュール | RP2040-Zero  |
-| ------------------------------ | ------------ |
-| VCC                            | 3.3V         |
-| SDA                            | GPIO 29      |
-| GND                            | GND          |
-| SCL                            | GPIO 28      |
-
 ## 配線図
 
 <img src="./images/wiring.jpg" alt="配線図" style="border: 1px solid #ccc;" />
 
-## 開発環境
+## プログラム開発環境
 
-### 必須ソフトウェア
+### 統合開発環境
 
-| ソフトウェア | 説明 |
+| 名前 | 説明 |
 |:-----------|:-----|
-| Arduino IDE | 開発環境 |
+| Arduino IDE | 統合開発環境 |
+
+**インストール**: 公式サイト [https://www.arduino.cc/en/software/#ide](https://www.arduino.cc/en/software/#ide) からダウンロード・インストール
+
+### ボードサポートパッケージ
+
+| 名前 | 説明 |
+|:------|:-----|
+| Raspberry Pi Pico/RP2040/RP2350 | ボードサポートパッケージ |
+
+**インストール**: Arduino IDE のボードマネージャーで検索・インストール
 
 ### 依存ライブラリ
 
@@ -94,12 +59,12 @@ RP2040-Zero を使用したコンパクトな温湿度・気圧計のデラッ�
 マイコンに電源を供給すると作動します。
 定期的に温湿度・気圧を測定して、OLED に表示します。
 
-下ボタンを押すと、表示パターンが切り替わります。
+ボタンを押すと、表示パターンが切り替わります。
 
 <img src="./images/pattern1.jpg" alt="グラフ" />
 <img src="./images/pattern2.jpg" alt="テキスト" />
 
-上ボタンを押すと、上下反転表示します。
+ボタンを長押しすると、上下反転表示します。
 
 <img src="./images/pattern3.jpg" alt="上下反転" />
 
